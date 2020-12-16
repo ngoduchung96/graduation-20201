@@ -35,10 +35,6 @@ app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/", async (req, res) => {
-  res.status(200).json({data: "hello"});
-} )
-
 app.use("/socketSend", async (req, res) => {
   io.emit('MESSAGE', req.query);
 
