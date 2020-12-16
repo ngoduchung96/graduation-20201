@@ -34,9 +34,11 @@ app.use(cors(corsOptions));
 // app.use(express.json({ limit: "2MB" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 app.use("/", async (req, res) => {
   res.status(200).json({data: "hello"});
 } )
+
 app.use("/socketSend", async (req, res) => {
   io.emit('MESSAGE', req.query);
 
@@ -48,7 +50,7 @@ app.use("/api", router);
 // vì nó không thể đọc được json 
 // sau khi "throw new Error" ở bất kì một middleware nào thì nó sẽ chạy câu lệnh
 // next({status:httpError}) và rồi sẽ bị errorMiddleware nhận ra và thực hiện res().send()
-server.listen(3000, () => {
+server.listen(process.env.PORT || 3000, () => {
   console.log(`server is running on port 3000`);
 });
 
